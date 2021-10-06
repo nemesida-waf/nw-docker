@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+ nwaf-dyn:
+  image: nemesida/nwaf-dyn-1.20
+  container_name: nwaf-dyn
+  ports:
+   - 80:80
+  volumes:
+   - ./nwaf/waf-config:/nginx.configs
+
+ nwaf-api-cabinet:
+  image: nemesida/nwaf-api-cabinet
+  container_name: nwaf-cabinet
+  ports:
+   - 8080:8080
+   - 8090:80
+  volumes:
+   - ./nwaf/api-cab-config:/nwaf-api
+   - ./nwaf/api-cab-base:/var/lib/postgresql
+
+ nwaf-signtest:
+  image: nemesida/nwaf-st
+  container_name: nwaf-signtest
+  ports:
+   - 8081:8088
+   - 82:80
+  volumes:
+   - ./nwaf/nwaf-signtest-config:/nwaf-signtest
+   - ./nwaf/nwaf-signtest-base:/var/lib/postgresql
