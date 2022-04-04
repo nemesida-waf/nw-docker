@@ -8,13 +8,13 @@ services:
       - 80:80
       - 5672:5672
     volumes:
-      - ./nwaf/waf-config:/nginx.configs
+      - /opt/nwaf/waf-config:/nginx.configs
 
   nwaf-mlc:
     image: nemesida/nwaf-mlc
     container_name: nwaf-mlc
     volumes:
-      - ./nwaf/mlc-config:/nwaf_mlc.configs
+      - /opt/nwaf/mlc-config:/nwaf_mlc.configs
 
   nwaf-api-cabinet:
     image: nemesida/nwaf-api-cabinet
@@ -23,8 +23,8 @@ services:
       - 8080:8080
       - 8090:80
     volumes:
-      - ./nwaf/api-cab-config:/nwaf-api
-      - ./nwaf/api-cab-base:/var/lib/postgresql
+      - /opt/nwaf/api-cab-config:/nwaf-api
+      - /opt/nwaf/api-cab-base:/var/lib/postgresql
 
   nwaf-signtest:
     image: nemesida/nwaf-st
@@ -33,5 +33,5 @@ services:
       - 8081:8088
       - 82:80
     volumes:
-      - ./nwaf/nwaf-signtest-config:/nwaf-signtest
-      - ./nwaf/nwaf-signtest-base:/var/lib/postgresql
+      - /opt/nwaf/nwaf-signtest-config:/nwaf-signtest
+      - /opt/nwaf/nwaf-signtest-base:/var/lib/postgresql
