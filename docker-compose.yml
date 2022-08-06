@@ -16,22 +16,13 @@ services:
     volumes:
       - /opt/nwaf/mlc-config:/nwaf_mlc.configs
 
-  nwaf-api-cabinet:
-    image: nemesida/nwaf-api-cabinet
-    container_name: nwaf-cabinet
+  nwaf-web:
+    image: nemesida/nwaf-web
+    container_name: nwaf-web
     ports:
       - 8080:8080
       - 8090:80
     volumes:
       - /opt/nwaf/api-cab-config:/nwaf-api
       - /opt/nwaf/api-cab-base:/var/lib/postgresql
-
-  nwaf-signtest:
-    image: nemesida/nwaf-st
-    container_name: nwaf-signtest
-    ports:
-      - 8081:8088
-      - 82:80
-    volumes:
-      - /opt/nwaf/nwaf-signtest-config:/nwaf-signtest
-      - /opt/nwaf/nwaf-signtest-base:/var/lib/postgresql
+      
