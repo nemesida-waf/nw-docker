@@ -16,13 +16,18 @@ services:
     volumes:
       - /opt/nwaf/mlc-config:/nwaf_mlc.configs
 
-  nwaf-web:
-    image: nemesida/nwaf-web
-    container_name: nwaf-web
+  nwaf-api:
+    image: nemesida/nwaf-api
+    container_name: nwaf-api
     ports:
       - 8080:8080
+    volumes:
+      - /opt/nwaf/nwaf-api:/nwaf-api
+
+  nwaf-cabinet:
+    image: nemesida/nwaf-cabinet
+    container_name: nwaf-cabinet
+    ports:
       - 8090:80
     volumes:
-      - /opt/nwaf/api-cab-config:/nwaf-api
-      - /opt/nwaf/api-cab-base:/var/lib/postgresql
-      
+      - /opt/nwaf/nwaf-cabinet:/nwaf-cabinet
