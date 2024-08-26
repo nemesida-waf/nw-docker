@@ -1,0 +1,128 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: nwaf-dyn-deployment
+   labels:
+     app: nwaf-dyn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nwaf-dyn
+  template:
+    metadata:
+      labels:
+        app: nwaf-dyn
+    spec:
+       hostNetwork: true
+       volumes:
+         - name: configs
+           hostPath:
+             path: /opt/nwaf/waf-config
+             type: Directory
+       containers:
+         - name: nwaf-dyn
+           image: nemesida/nwaf-dyn:latest
+           ports:
+             - containerPort: 5672
+             - containerPort: 80
+           volumeMounts:
+             - name: configs
+               mountPath: /nginx.configs
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: nwaf-mlc-deployment
+   labels:
+     app: nwaf-mlc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nwaf-mlc
+  template:
+    metadata:
+      labels:
+        app: nwaf-mlc
+    spec:
+       hostNetwork: true
+       volumes:
+         - name: configs
+           hostPath:
+             path: /opt/nwaf/mlc-config
+             type: Directory
+       containers:
+         - name: nwaf-mlc
+           image: nemesida/nwaf-mlc:latest
+           volumeMounts:
+             - name: configs
+               mountPath: /nwaf_mlc.configs
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: nwaf-api-deployment
+   labels:
+     app: nwaf-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nwaf-api
+  template:
+    metadata:
+      labels:
+        app: nwaf-api
+    spec:
+       hostNetwork: true
+       volumes:
+         - name: configs
+           hostPath:
+             path: /opt/nwaf/nwaf-api
+             type: Directory
+       containers:
+         - name: nwaf-api
+           image: nemesida/nwaf-api:latest
+           ports:
+             - containerPort: 8080
+           volumeMounts:
+             - name: configs
+               mountPath: /nwaf-api
+
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: nwaf-cabinet-deployment
+   labels:
+     app: nwaf-cabinet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nwaf-cabinet
+  template:
+    metadata:
+      labels:
+        app: nwaf-cabinet
+    spec:
+       hostNetwork: true
+       volumes:
+         - name: configs
+           hostPath:
+             path: /opt/nwaf/nwaf-cabinet
+             type: Directory
+       containers:
+         - name: nwaf-cabinet
+           image: nemesida/nwaf-cabinet:latest
+           ports:
+             - containerPort: 80
+           volumeMounts:
+             - name: configs
+               mountPath: /nwaf-cabinet
