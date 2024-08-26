@@ -122,7 +122,7 @@ spec:
          - name: nwaf-cabinet
            image: nemesida/nwaf-cabinet:latest
            ports:
-             - containerPort: 80
+             - containerPort: 8000
            volumeMounts:
              - name: configs
                mountPath: /nwaf-cabinet
