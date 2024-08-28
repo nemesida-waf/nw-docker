@@ -126,3 +126,34 @@ spec:
            volumeMounts:
              - name: configs
                mountPath: /nwaf-cabinet
+               
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: nwaf-scanner-deployment
+   labels:
+     app: nwaf-scanner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nwaf-scanner
+  template:
+    metadata:
+      labels:
+        app: nwaf-scanner
+    spec:
+       hostNetwork: true
+       volumes:
+         - name: configs
+           hostPath:
+             path: /opt/nwaf/nwaf-scanner
+             type: Directory
+       containers:
+         - name: nwaf-scanner
+           image: nemesida/nwaf-scanner:latest
+           volumeMounts:
+             - name: configs
+               mountPath: /nwaf-scanner

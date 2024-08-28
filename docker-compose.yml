@@ -31,3 +31,9 @@ services:
       - 8090:80
     volumes:
       - /opt/nwaf/nwaf-cabinet:/nwaf-cabinet
+      
+  nwaf-scanner:
+    image: nemesida/nwaf-scanner
+    container_name: nwaf-scanner
+    volumes:
+      - /opt/nwaf/nwaf-scanner:/nwaf-scanner
