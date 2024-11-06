@@ -7,6 +7,7 @@ services:
     ports:
       - 80:80
       - 5672:5672
+      - 5673:5673
     volumes:
       - /opt/nwaf/waf-config:/nginx.configs
 
@@ -16,6 +17,16 @@ services:
     volumes:
       - /opt/nwaf/mlc-config:/nwaf_mlc.configs
 
+  PostgreSQL:
+    image: postgres
+    container_name: postgresql
+    environment:
+      POSTGRES_PASSWORD: ""
+    ports:
+      - 5432:5432
+    volumes:
+      - /opt/nwaf/nwaf-db:/var/lib/postgresql/data
+      
   nwaf-api:
     image: nemesida/nwaf-api
     container_name: nwaf-api
