@@ -4,6 +4,8 @@ services:
   nwaf-dyn:
     image: nemesida/nwaf-dyn
     container_name: nwaf-dyn
+    environment:
+      TZ: "Europe/Moscow"
     ports:
       - 80:80
       - 5672:5672
@@ -14,6 +16,8 @@ services:
   nwaf-mlc:
     image: nemesida/nwaf-mlc
     container_name: nwaf-mlc
+    environment:
+      TZ: "Europe/Moscow"
     volumes:
       - /opt/nwaf/mlc-config:/nwaf_mlc.configs
 
@@ -22,6 +26,7 @@ services:
     container_name: postgresql
     environment:
       POSTGRES_PASSWORD: ""
+      TZ: "Europe/Moscow"
     ports:
       - 5432:5432
     volumes:
@@ -30,6 +35,8 @@ services:
   nwaf-api:
     image: nemesida/nwaf-api
     container_name: nwaf-api
+    environment:
+      TZ: "Europe/Moscow"
     ports:
       - 8080:8080
     volumes:
@@ -38,6 +45,8 @@ services:
   nwaf-cabinet:
     image: nemesida/nwaf-cabinet
     container_name: nwaf-cabinet
+    environment:
+      TZ: "Europe/Moscow"
     ports:
       - 8090:80
     volumes:
@@ -46,5 +55,8 @@ services:
   nwaf-scanner:
     image: nemesida/nwaf-scanner
     container_name: nwaf-scanner
+    environment:
+      TZ: "Europe/Moscow"
     volumes:
       - /opt/nwaf/nwaf-scanner:/nwaf-scanner
+

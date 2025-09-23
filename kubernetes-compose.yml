@@ -23,6 +23,9 @@ spec:
        containers:
          - name: nwaf-dyn
            image: nemesida/nwaf-dyn:latest
+           env:
+            - name: TZ
+              value: Europe/Moscow
            ports:
              - containerPort: 5672
              - containerPort: 80
@@ -57,6 +60,9 @@ spec:
        containers:
          - name: nwaf-mlc
            image: nemesida/nwaf-mlc:latest
+           env:
+            - name: TZ
+              value: Europe/Moscow
            volumeMounts:
              - name: configs
                mountPath: /nwaf_mlc.configs
@@ -88,6 +94,9 @@ spec:
        containers:
          - name: nwaf-api
            image: nemesida/nwaf-api:latest
+           env:
+            - name: TZ
+              value: Europe/Moscow
            ports:
              - containerPort: 8080
            volumeMounts:
@@ -121,6 +130,9 @@ spec:
        containers:
          - name: nwaf-cabinet
            image: nemesida/nwaf-cabinet:latest
+           env:
+            - name: TZ
+              value: Europe/Moscow
            ports:
              - containerPort: 8000
            volumeMounts:
@@ -154,6 +166,10 @@ spec:
        containers:
          - name: nwaf-scanner
            image: nemesida/nwaf-scanner:latest
+           env:
+            - name: TZ
+              value: Europe/Moscow
            volumeMounts:
              - name: configs
                mountPath: /nwaf-scanner
+
